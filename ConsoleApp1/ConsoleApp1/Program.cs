@@ -4,13 +4,17 @@ namespace ConsoleApp1
     class Program
     {
         static Random rnd = new Random(); //инициализация рандома
-        private static int difficulty = 0, gold = 500;
-        private static bool firstTurn, secret = false;
-        private static char[,] crosses = new char[3, 3];
-        public static int mas1, mas2;
-        public static string name1, name2;
-        public static int code = 0;
-        public static void OutCrossSituation() //отображение массива
+        private static int difficulty = 0, gold = 500; //сложность (влияет на сложность ботов, 0 - дружеская), золото
+        private static bool firstTurn, secret = false; //1 - отвечает за то, кто первым ходит; 2 - открыта ли пасхалка
+        private static char[,] crosses = new char[3, 3]; //главный массив, в котором хранятся данные игры
+        public static int mas1, mas2; //значения, отвечающие за ход
+        public static string name1, name2; //игрок 1, игрок 2
+        public static int code = 0; //код, генерируется рандомно
+
+        /// <summary>
+        /// Отображение массива, в качестве 3 на 3 поля
+        /// </summary>
+        public static void OutCrossSituation()
         {
             Console.Clear();
             Console.WriteLine("   A B C");
@@ -25,7 +29,11 @@ namespace ConsoleApp1
             Console.WriteLine(" " + crosses[2, 0] + "|" + crosses[2, 1] + "|" + crosses[2, 2]);
             Console.WriteLine();
         }
-        public static int OutCrossSituation(string hod, int amountHod) //запись хода игрока путем перегрузки
+
+        /// <summary>
+        /// Запись хода игрока методом перегрузки функции
+        /// </summary>
+        public static int OutCrossSituation(string hod, int amountHod)
         {
             bool mistake = false;
             try
@@ -43,7 +51,7 @@ namespace ConsoleApp1
                 {
                     mas2 = 2;
                 }
-                else mistake = true;
+                else mistake = true; //был сделан неправильный ход
                 if (hod.Contains("1"))
                 {
                     mas1 = 0;
@@ -73,10 +81,13 @@ namespace ConsoleApp1
             OutCrossSituation();
             if (mistake == true)
             {
-                return -1;
+                return amountHod -1;
             }
-            return +0;
+            return amountHod;
         }
+        /// <summary>
+        /// Введение перед игрой
+        /// </summary>
         public static void Introduction()
         {
             //Сбрасывание значения массива
@@ -88,11 +99,11 @@ namespace ConsoleApp1
                 }
             }
 
-            if (false)
+            if (false) //
             {
                 Console.WriteLine("Выберите за кого вы будете ходить: X или O");
             }
-            if (true)
+            if (true) //
             {
                 Console.Title += "Дружеский матч. ";
                 Console.Write("Игрок 1, напиши свое имя: ");
@@ -116,10 +127,10 @@ namespace ConsoleApp1
                             firstTurn = false;
                             return;
                         }
-                        else if (choice == "random")
+                        else if (choice == "random") //выбирает игрока, ходящего первым, на рандом
                         {
                             Console.WriteLine("Итак....");
-                            System.Threading.Thread.Sleep(2000);
+                            System.Threading.Thread.Sleep(2000); //специальная задержка, чтобы подогреть интригу
                             int random = rnd.Next(0, 2);
                             Console.Write("Первым будет ходить ");
                             if (random == 0)
@@ -146,7 +157,10 @@ namespace ConsoleApp1
                 }
             }
         }
-        public static void TheGame() //основная функция игры
+        /// <summary>
+        /// Основная функция игры, вызывающая нужные функции в нужный момент
+        /// </summary>
+        public static void TheGame()
         {
             Introduction();
             Console.Clear();
@@ -183,34 +197,40 @@ namespace ConsoleApp1
                 winningSide = checkTheVictory(winningSide);
                 amountHod++;
             }
-            if (winningSide == 0)
+            if (winningSide == 0) //ходы закончились, никто не победил
             {
                 Console.WriteLine("Игра окончена! Победила дружба! ");
             }
-            else if (winningSide == 1)
+            else if (winningSide == 1) //выиграл Х
             {
                 if (firstTurn)
                     Console.WriteLine("Игра окончена! Победил " + name1 + "!");
                 else Console.WriteLine("Игра окончена! Победил " + name2 + "!");
             }
-            else if (winningSide == 2)
+            else if (winningSide == 2) //выиграл O
             {
                 if (firstTurn) Console.WriteLine("Игра окончена! Победил " + name2 + "!");
                 else Console.WriteLine("Игра окончена! Победил " + name1 + "!");
             }
             else
             {
-                Console.WriteLine("Ты пидор! Хули код ломаешь?");
+                Console.WriteLine("Ты пидор! Хули код ломаешь?"); //ахахаххаха
             }
+            // Даем деньги на пожертвование бедным
             int randomGold = 0;
             randomGold = rnd.Next(1, 6);
             gold += randomGold;
             Console.WriteLine("+" + randomGold + " G");
+
             Console.WriteLine("Нажмите любую клавишу для продолжения....");
             Console.ReadKey();
         }
-        public static int checkTheVictory(int winningSide)
-        {
+
+        /// <summary>
+        /// Проверка на победителя, возвращает: 0 - победитель не найден, 1 - победитель - 'X', 2 - победитель - 'O'
+        /// </summary>
+        public static int checkTheVictory(int winningSide) 
+        { 
             //по вертикали и по горизонтали
             for (int i = 0; i < 3; i++) {
                 if (crosses[0, i] == crosses[1, i])
@@ -219,11 +239,11 @@ namespace ConsoleApp1
                     {
                         if (crosses[2, i] == 'X')
                         {
-                            return 1;
+                            return 1; //победил X 
                         }
                         else if (crosses[2, i] == 'O')
                         {
-                            return 2;
+                            return 2; //победил O
                         }    
                     }
                 }
@@ -237,25 +257,56 @@ namespace ConsoleApp1
                     {
                         if (crosses[i, 2] == 'X')
                         {
-                            return 1;
+                            return 1; //победил X
                         }
                         else if (crosses[i, 2] == 'O')
                         {
-                            return 2;
+                            return 2; //победил O
                         }
                     }
+                }
+            }
+
+            //по диагонали сверху вниз
+            if(crosses[0,0] == crosses[1,1] && crosses[1,1] == crosses[2, 2])
+            {
+                if(crosses[1,1] == 'X')
+                {
+                    return 1; //победил X
+                }
+                
+                else if (crosses[1,1] == 'O')
+                {
+                    return 2; //победил O
+                }
+            }
+
+            //по диагонали снизу вверх
+            if(crosses[2,0] == crosses[1,1] && crosses[1,1] == crosses[0, 2])
+            {
+                if (crosses[1, 1] == 'X')
+                {
+                    return 1; //победил X
+                }
+
+                else if (crosses[1, 1] == 'O')
+                {
+                    return 2; //победил O
                 }
             }
 
             //победы не будет, извините
             return 0;
         }
-        static void Main(string[] args) //Что-то типа главного меню
+        /// <summary>
+        /// Главная функция программы, исполняет функцию главного меню
+        /// </summary>
+        static void Main(string[] args)
         {
             //Введение
             while (true) {
                 Console.Clear();
-                Console.Title = "Крестики-нолики v 0.7 by SCAPIFOL. ";
+                Console.Title = "Крестики-нолики v 0.81 by CAFFI-dev. ";
                 if(code != 0)
                 {
                     Console.Title += "Код от сейфа: " + code + ". ";
@@ -341,7 +392,7 @@ namespace ConsoleApp1
                                     if (rnd.Next(0, 4) == 0)
                                     {
                                         Console.WriteLine("Также в потайном кармашке ты у него находишь ключ (на котором");
-                                        Console.WriteLine("написаны три каких то цифры: , и 50G");
+                                        Console.WriteLine("написаны три каких то цифры, и 50G");
                                         Console.WriteLine("+50 G");
                                         System.Threading.Thread.Sleep(600);
                                         bool normalCode = false;
@@ -373,10 +424,13 @@ namespace ConsoleApp1
                             if (gold >= 500)
                             {
                                 Console.WriteLine("Псссс....");
+                                System.Threading.Thread.Sleep(600);
                                 Console.WriteLine("Подойди сюда... Расскажу тебе секрет");
                                 System.Threading.Thread.Sleep(600);
                                 Console.WriteLine("Если нажмешь s в меню, то найдешь нечто невообразимое!");
+                                System.Threading.Thread.Sleep(600);
                                 Console.WriteLine("Не бойся, мне твои деньги не к чему, иожешь себе их оставить!");
+                                System.Threading.Thread.Sleep(600);
                             }
                             else
                             {
@@ -467,7 +521,9 @@ namespace ConsoleApp1
                     if (choice == "q")
                     {
                         //выход из программы
-                        System.Diagnostics.Process.GetCurrentProcess().Close();
+                        //0.9 - добавление облегчающих функций
+                        //1.0 - боты
+                        //1.1 - финальный баг фикс
                     }
                 }
             }
