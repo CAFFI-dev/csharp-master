@@ -1,0 +1,10 @@
+C:\Users\User\source\repos\JustAFunProgram\JustAFunProgram\bin\Debug\JustAFunProgram.exe.config
+C:\Users\User\source\repos\JustAFunProgram\JustAFunProgram\bin\Debug\JustAFunProgram.exe
+C:\Users\User\source\repos\JustAFunProgram\JustAFunProgram\bin\Debug\JustAFunProgram.pdb
+C:\Users\User\source\repos\JustAFunProgram\JustAFunProgram\obj\Debug\JustAFunProgram.csprojAssemblyReference.cache
+C:\Users\User\source\repos\JustAFunProgram\JustAFunProgram\obj\Debug\JustAFunProgram.Form1.resources
+C:\Users\User\source\repos\JustAFunProgram\JustAFunProgram\obj\Debug\JustAFunProgram.Properties.Resources.resources
+C:\Users\User\source\repos\JustAFunProgram\JustAFunProgram\obj\Debug\JustAFunProgram.csproj.GenerateResource.cache
+C:\Users\User\source\repos\JustAFunProgram\JustAFunProgram\obj\Debug\JustAFunProgram.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\JustAFunProgram\JustAFunProgram\obj\Debug\JustAFunProgram.exe
+C:\Users\User\source\repos\JustAFunProgram\JustAFunProgram\obj\Debug\JustAFunProgram.pdb
