@@ -4,6 +4,10 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <ApplicationIcon></ApplicationIcon>
+    <AssemblyName>TicTacToe by CAFFI</AssemblyName>
+    <RootNamespace>TicTacToe by CAFFI</RootNamespace>
+    <Authors>CAFFI</Authors>
+    <Description>Simple Program</Description>
   </PropertyGroup>
 
 </Project>

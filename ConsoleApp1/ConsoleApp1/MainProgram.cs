@@ -1,7 +1,7 @@
 ﻿using System;
 namespace ConsoleApp1
 {
-    class Program
+    class MainProgram
     {
         static Random rnd = new Random(); //инициализация рандома
         private static int difficulty = 0, gold = 500; //сложность (влияет на сложность ботов, 0 - дружеская), золото
