@@ -3,27 +3,52 @@ using System.Threading;
 using System.Reflection;
 using System.Security.Cryptography.X509Certificates;
 using System.ComponentModel;
+using Виселица.Properties;
+using System.IO;
+using System.Collections.Generic;
 
 namespace Виселица
 {
     class Program
     {
+        private static StreamReader sr = (StreamReader)Resources.ResourceManager.GetObject("WordList");
         public static int mistake = 0;//Сколько ошибок было сделано
         public static string word;
         public static char[] chars;
         public static char[] possibleChars;
         public static bool goodAttempt; //Хороша ли попытка, иль нет?
         /// <summary>
+        /// Создает массивы, в которых слова
+        /// </summary>
+        public static void CreateArrays()
+        {
+            string iner = sr.ReadLine();
+            int stop = 0;
+            while (stop == 0) 
+            {
+                if (iner.Contains(':'))
+                {
+                    stop++;
+                }
+                else sr.ReadLine();
+            }
+            while(stop == 1)
+            {
+                List<string>  = new List<string>();
+            }
+        }
+        /// <summary>
         /// Главная функция программы
         /// </summary>
         /// <param name="args">Аргументы для запуска</param>
         static void Main(string[] args)
         {
+            CreateArrays();
             bool exitTheGame = false; //переменная, отвечающая за выход 
             while (exitTheGame == false)
             {
                 Console.Clear();
-                Console.Title = "Виселица. v 0.1";
+                Console.Title = "Виселица. v 0.21";
                 Console.WriteLine("Привет! Добро пожаловать в виселицу!");
                 Console.WriteLine("Что ты хочешь сделать?");
                 //меню выборов
@@ -57,10 +82,12 @@ namespace Виселица
             while (startAgain == true)
             {
                 Console.WriteLine();
+                Console.WriteLine("Что вы хотите сделать: ");
                 Console.Write("Введите слово: ");
                 word = Console.ReadLine();
                 if (word.Length >= 5 && word.Length <= 12) //проверка длины слова
                 {
+                    word.ToUpper();
                     chars = new char[word.Length];
                     for (int i = 0; i < chars.Length; i++) //заполняем массив загадочными буквами
                     {
@@ -115,6 +142,7 @@ namespace Виселица
                 Console.WriteLine("Попытка: {0}, осталось попыток: {1} ", mistake + 1, 6 - mistake);
                 Console.Write("Буква: ");
                 char bykva = Console.ReadKey().KeyChar;
+                System.Char.ToUpper(bykva);
                 Console.WriteLine();
                 chars = OpenTheLetters(chars, bykva);
                 if(goodAttempt == false)
