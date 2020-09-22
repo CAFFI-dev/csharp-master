@@ -1,6 +1,7 @@
 # Collection of my C# programs
-Collection of my programs, that made on C#
-##Including:
+Collection of my programs, that made on C# 
+##Including
+
 ### ConsoleApp1
 Tic Tac Toe v.0.7. 
 My third project that was made with C# Windows Forms without the internet.
